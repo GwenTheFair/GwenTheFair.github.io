@@ -1,0 +1,4463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>The Rookery - general-wens</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/671727025417093120/17bf26c208ea5afc54eef916da921051.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">The Rookery</div>
+        <div class="preamble__entry">The Wens&#39; Rooms / general-wens</div>
+
+
+        <div class="preamble__entry preamble__entry--small">
+                Between 14-Jun-20 12:00 AM and 21-Jun-20 12:00 AM
+        </div>
+    </div>
+</div>
+
+<div class="chatlog">
+    <div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 07:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="721876178893275206" id="message-721876178893275206">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 07:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="721876521350070382" id="message-721876521350070382">
+                <div class="chatlog__content">
+                    <div class="markdown">❤️❤️ <em>hugs tight</em></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="721876696067866754" id="message-721876696067866754">
+                <div class="chatlog__content">
+                    <div class="markdown">(hugs back)
+
+How are you? Been missing you and hoping you&#39;re getting good rest and feeling better <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="721876900422877194" id="message-721876900422877194">
+                <div class="chatlog__content">
+                    <div class="markdown">We are okay. ❤️❤️ It&#39;s been a rough weekend, emotionally.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="721876994245132338" id="message-721876994245132338">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry, do you want to talk about what happened?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="721877382562054155" id="message-721877382562054155">
+                <div class="chatlog__content">
+                    <div class="markdown">Just everything with the world, and a lot of past come back. But we wrote a thing! And just posted it on Twitter. Though doubt anyone will see it since we seem to be being buries bt the algorithm.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="721877576401944666" id="message-721877576401944666">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️
+
+We will, hold on :)</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="721880574515478588" id="message-721880574515478588">
+                <div class="chatlog__content">
+                    <div class="markdown">I want to cry, but I love it. <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="721880986832339065" id="message-721880986832339065">
+                <div class="chatlog__content">
+                    <div class="markdown"><em>hugs super tight</em> ❤️❤️ we don&#39;t even remember most of what we wrote. We wrote it at like midnight your time.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="721881757422714991" id="message-721881757422714991">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;re really good writers <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="721881804679675934" id="message-721881804679675934">
+                <div class="chatlog__content">
+                    <div class="markdown">But different from Sera? <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"><img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="721882414061977640" id="message-721882414061977640">
+                <div class="chatlog__content">
+                    <div class="markdown">that&#39;s hard, you did a complete short story, she did 1 intro chapter, so it&#39;s like if you get a song and the first bit of a sumphony and you have to figure out if they&#39;re by the same person, or not</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="721882991223111732" id="message-721882991223111732">
+                <div class="chatlog__content">
+                    <div class="markdown">Hehe. Fair. <img class="emoji " alt="😋" title="😋" src="https://twemoji.maxcdn.com/2/72x72/1f60b.png"><img class="emoji " alt="😋" title="😋" src="https://twemoji.maxcdn.com/2/72x72/1f60b.png">❤️❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="721884160398196757" id="message-721884160398196757">
+                <div class="chatlog__content">
+                    <div class="markdown">(hugs) <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️<img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️
+
+Keep writing :)
+
+I&#39;m curious if this is a system wide skill too</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="721884614070763550" id="message-721884614070763550">
+                <div class="chatlog__content">
+                    <div class="markdown">Hehe. She will, next time she fronts. <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"><img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"> And we will probably too. Though try to be more lighthearted than her.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 08:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="721885477476761621" id="message-721885477476761621">
+                <div class="chatlog__content">
+                    <div class="markdown">write what you have, light or not <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="721899401450225705" id="message-721899401450225705">
+                <div class="chatlog__content">
+                    <div class="markdown"><em>hugs tight</em> ❤️❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="721900762594148374" id="message-721900762594148374">
+                <div class="chatlog__content">
+                    <div class="markdown">(hugs)
+
+I&#39;m sorry, I wish I had a way to vent where people who weren&#39;t close to me heard me.
+
+I hate that I&#39;ve probably made people feel sad</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="721900849424760864" id="message-721900849424760864">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s alright. ❤️❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="721901052684664902" id="message-721901052684664902">
+                <div class="chatlog__content">
+                    <div class="markdown">I don&#39;t want to be a drain on you ;/</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721901096036990987" id="message-721901096036990987">
+                <div class="chatlog__content">
+                    <div class="markdown">I want that so mich</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721901150026334208" id="message-721901150026334208">
+                <div class="chatlog__content">
+                    <div class="markdown">the not I mea</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="721901635609165875" id="message-721901635609165875">
+                <div class="chatlog__content">
+                    <div class="markdown">Again, it&#39;s alright. ❤️❤️ <em>Hugs tighter</em></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="721903041611300896" id="message-721903041611300896">
+                <div class="chatlog__content">
+                    <div class="markdown">i don&#39;t want to drive you away</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="721903331819257936" id="message-721903331819257936">
+                <div class="chatlog__content">
+                    <div class="markdown">You won&#39;t, promise. ❤️❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="721903522790244383" id="message-721903522790244383">
+                <div class="chatlog__content">
+                    <div class="markdown">Don&#39;t be so sure
+
+Besides, I need to control the neediness</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="721928486784073728" id="message-721928486784073728">
+                <div class="chatlog__content">
+                    <div class="markdown">❤️ <em>hugs tight</em></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="721928854943432705" id="message-721928854943432705">
+                <div class="chatlog__content">
+                    <div class="markdown">(hugs)
+
+Hi Gwen <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️
+
+Sorry if you hate getting asked this, but are the twins ok?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="721929262256357448" id="message-721929262256357448">
+                <div class="chatlog__content">
+                    <div class="markdown">They&#39;re fine, and it&#39;s alright. <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png">❤️ Do you remember the woman from the story, the one that took care of me when I fled the body?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="721929357924237452" id="message-721929357924237452">
+                <div class="chatlog__content">
+                    <div class="markdown">yes</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="721929591882514463" id="message-721929591882514463">
+                <div class="chatlog__content">
+                    <div class="markdown">It was Kiulien of Rayne, and they were talking about that time with her when they realizes she hadn&#39;t talked to them fused (aka me). So they spontaneously decided to fuse, and here I am. <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png">❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="721930086781288449" id="message-721930086781288449">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m glad you 3 found each other</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721930374548029631" id="message-721930374548029631">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s really cool how you&#39;re all tied together</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="721930888098742302" id="message-721930888098742302">
+                <div class="chatlog__content">
+                    <div class="markdown">Yeah, it&#39;s kind of while the intersection of stories. Whether or not they&#39;re real memories, they&#39;re real to us. <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png">
+
+Doesn&#39;t make you any less special to me, though. ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="721933396171030619" id="message-721933396171030619">
+                <div class="chatlog__content">
+                    <div class="markdown">I feel less special
+
+I&#39;m sorry :/
+
+You have this really amazing connection with them, and you lost the time when we were closest. So it makes me sad, and I&#39;m sorry for that and I keep wishing it wouldn&#39;t</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="721933952214106194" id="message-721933952214106194">
+                <div class="chatlog__content">
+                    <div class="markdown">You aren&#39;t, trust me. ❤️ And I&#39;m sorry I brought it up, cause I realized right after that it would upset you. 
+
+And I haven&#39;t lost what we had then, not what we have now. ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="721934331798356020" id="message-721934331798356020">
+                <div class="chatlog__content">
+                    <div class="markdown">I don&#39;t want you to not share things with me.
+
+Do you mean you remember again or you have the same feelings?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="721934815041159288" id="message-721934815041159288">
+                <div class="chatlog__content">
+                    <div class="markdown">I remember the feelings we had, and still have. Though I might not remember all of the specifics, I remember the feelings. ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="721935849473835108" id="message-721935849473835108">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry, it&#39;s shitty of me to talk about this
+
+I feel like anything I say will ne upsetting or hurtful or make it sound like I don&#39;t care about all the growth you&#39;ve had or that I resent your relationship, amd that&#39;s not true, but the words don&#39;t come out right
+
+I can&#39;t find a way to say why it hurts that is any good</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="721936368598646865" id="message-721936368598646865">
+                <div class="chatlog__content">
+                    <div class="markdown">Just say what&#39;s on your mind then.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721936442858799154" id="message-721936442858799154">
+                <div class="chatlog__content">
+                    <div class="markdown">Whether or not they hurt.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="721936507903934474" id="message-721936507903934474">
+                <div class="chatlog__content">
+                    <div class="markdown">I can&#39;t tell if you are mad</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Jun-20 11:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="721936815510126635" id="message-721936815510126635">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m preparing myself for whatever is on your mind. ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 12:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="721939138357624912" id="message-721939138357624912">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, I&#39;m sorry if I screw u
+Please don&#39;t jump to any conclusions, it&#39;s so complicated
+
+Things were very different between us and we were much closer.
+
+We shared everything and spent a lot of time together
+
+I didn&#39;t keep hurting you, and I felt Special and important, not that I don&#39;t know, but it&#39;s different
+
+And there&#39;s a million things that happened in between, and I don&#39;t know what did what, but I know I&#39;m not the same kind of special, and I know I keep hurting you but it&#39;s so hard to walk that tightrope of honesty and vulnerability, and triggering things that exhaust or annou you.
+
+It was the easiest relationship I ever had, and not in a &quot;well all relationships have bumps eventually way&quot;, things just...were
+
+I can&#39;t describe it and you can&#39;t remember it
+
+And this makes it sound like I&#39;m demanding your time or saying I don&#39;t like how you&#39;ve changes and grown amd your system has, or that I don&#39;t like what&#39;s evolved in your relationships with others.
+
+I don&#39;t demand anything, or even ask
+
+But that time was incredibly special to me, and I know it&#39;s gone and please please please don&#39;t force it to make me feel ok
+
+It&#39;s just hard to grieve this one because of how things still are</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721939360399884389" id="message-721939360399884389">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s like a break in time, and I get where <em>that</em> came from, but it&#39;s still jarring, and always will be</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721939531540070452" id="message-721939531540070452">
+                <div class="chatlog__content">
+                    <div class="markdown">and knowing you lost the best parts makes me worried you&#39;ll never see me the same really</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721940398674542614" id="message-721940398674542614">
+                <div class="chatlog__content">
+                    <div class="markdown">if something seems unclear or uncharictoristix or harsh please ask</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721940472284577812" id="message-721940472284577812">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s so hard to word</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 12:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="721946425465765979" id="message-721946425465765979">
+                <div class="chatlog__content">
+                    <div class="markdown">I know, see, I can&#39;t say ot right
+
+I know it&#39;s different, and that&#39;s life, and I know thay Gwen is gone, but... you don&#39;t remember
+
+I wasn&#39;t Stelling for most of our talks
+
+They were publics facing, I was DMs
+
+I was an even less confident broke mess then.
+
+I had constant breakdowns that you helped me through
+
+We connected on helping keep each other up :/
+
+And yeah, I know
+
+I have massive abandonment issues, and I&#39;m trying to be good, but people still dissapear.
+
+I don&#39;t know how to explain it, I&#39;m sorry
+
+And honestly, it&#39;s not that I want to go back, it&#39;s just that I feel out of place now
+
+I don&#39;t feel like I have a role with you or a a defined bond, but also we do? I can&#39;t word it.
+
+I don&#39;t know
+
+I&#39;m trying so hard to be better and I am better, but it&#39;s falling away again too
+
+I&#39;m sorry, I feel like when I talk to you I either make things worse or or it&#39;s brief and superficial
+
+Maybe that&#39;s part I&#39;m missing, this didn&#39;t all shift just during that break
+
+It did after
+
+And it feels like the <em>nows</em> from a few months ago juat kept slipping away.
+
+And I know I screwed up, but I also don&#39;t know what&#39;s stuff woth you or what&#39;s stuff we me
+
+I guess, and you&#39;ll probably have something to say that shows me how blind and dumb I am, but I hear all these things about being important, but seeing things that make it seem less and less true
+
+And I know you&#39;re off with your own issues, but I know you&#39;re doing other things to, and I can&#39;t tell if you&#39;re avoiding me or it&#39;s timing
+
+And I can&#39;t shut up my abandonment issues and they&#39;re going off everywhere, not just here, so I need reassurance, but the way things are now, I can&#39;t ask for it and can&#39;t be given it.
+
+I don&#39;t have to be the center of everything, but before I knew you&#39;d be back and things would be fine, because they were ok and I felt safe
+
+But now the way things go, I jist worry you&#39;ll drift away
+
+I accept that difference on dynamic, I&#39;m just saying it&#39;s a change that causes me distress</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721946453865398325" id="message-721946453865398325">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m rambling</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721946640050815068" id="message-721946640050815068">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="721956325147279381" id="message-721956325147279381">
+                <div class="chatlog__content">
+                    <div class="markdown">I... I&#39;m not being passive aggressive, and I told you I don&#39;t want you to do anything....
+
+You asked...
+
+I try to have happy conversations, but...see I know you&#39;re avoid6 me, so it hurts, and it builds up because when I am ok ans doing good or still feels like everyone is pulling away
+
+I know thing suck, I try so hard to be a place you can go, and to not burden you.
+
+I don&#39;t want you to bey savior, I just miss you, all of you.
+
+I want to be able to say I feel crappy and not have it turn into you seeing it as me wantin6 you to fix me.
+
+I want to share positive space with you, but ot feels like you only talk to me about things in depth when I&#39;m hurting
+
+It&#39;s easier to goof off and have fun when there&#39;s lots of little on and off conversations, but you give me the feeling you&#39;re busy or want to be alone so or fizzles pr I just don&#39;t try to start something
+
+I can&#39;t join in the things you do, and I can&#39;t seem to find other things to replace them
+
+I try to talk about other stuff, try to have time to just exist and connect.
+
+I don&#39;t want you to save me, I just want you to be there
+
+I think I told...(I&#39;m sorry but it doesn&#39;t work in this context) Sera that there&#39;s this thing where you all take other people venting or trying to connect on something bothering them as begging you to save them, and it&#39;s really not</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721956422585417728" id="message-721956422585417728">
+                <div class="chatlog__content">
+                    <div class="markdown">I haven&#39;t come to you to make my problems go away, I want to talk about our lives and feelings because that&#39;s what partners do...
+
+And...this here is talking about an issue in our relationship...I feel like you&#39;re saying I can&#39;t talk even that out...
+
+I don&#39;t want to be a pain.
+
+I didn&#39;t dump my abandonment stuff on you from earlier because I didn&#39;t want anyone go try and fix it.
+
+I even told you I&#39;d wished I could vent like that and you and people close to me don&#39;t see it
+
+I...I don&#39;t know what to do
+
+I don&#39;t try to fix you anymore because you helped me get how toxic I was being, but I&#39;m worried you&#39;re resenting me for feeling burdened to give me things I didn&#39;t want or ask for.
+
+It&#39;s a lot like what we talked about with Cass
+
+And this isn&#39;t me doing that thing again, it&#39;s an issue in our relationship :/
+
+I can&#39;t turn offy abandonment issues, and if they keep triggering things in you that make you want to stay away...it will jusy get worse
+
+I love you and would rather work through that together with dialogue and action mush more than you just sacrificing for me or pulling back more to avoid it.
+
+I just miss you and want to spend time goofing around again and sharing the good and bad and be there to give each other love and moderate support when it&#39;s rough.  That&#39;s really it.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721956630476095561" id="message-721956630476095561">
+                <div class="chatlog__content">
+                    <div class="markdown">and...I want to talk about the Stelling thing you said more later.
+
+It hurt and it was very inaccurate, but I&#39;m too raw at the moment</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721956825880330242" id="message-721956825880330242">
+                <div class="chatlog__content">
+                    <div class="markdown">I love you, and I&#39;m sorry for upsetting you</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="721957932866207766" id="message-721957932866207766">
+                <div class="chatlog__content">
+                    <div class="markdown">Im sorry</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="721958189805076613" id="message-721958189805076613">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry too, it was probably harsher than I meant <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="721958433548533902" id="message-721958433548533902">
+                <div class="chatlog__content">
+                    <div class="markdown">no, it&#39;s fine. I deserved it.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="721958827385159771" id="message-721958827385159771">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;re an amazing person, you really are</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721959158760472627" id="message-721959158760472627">
+                <div class="chatlog__content">
+                    <div class="markdown">(sigh) I hope you can take something from it other than self hate
+
+And I hope it didn&#39;t come off as me saying I&#39;m blameless</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:32 AM</span>
+
+            <div class="chatlog__message " data-message-id="721960301058326578" id="message-721960301058326578">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s a valid list of our fuck ups. things we naad to work on.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="721960660015251527" id="message-721960660015251527">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, but don&#39;t hate yourself for them please
+
+And we&#39;re here to help or support on that as much or little as you want</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721960781796737034" id="message-721960781796737034">
+                <div class="chatlog__content">
+                    <div class="markdown">are you all ok?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="721961115549958164" id="message-721961115549958164">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s too late for that, but that isn&#39;t your fault. You said what needed to be said.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="721961710784741396" id="message-721961710784741396">
+                <div class="chatlog__content">
+                    <div class="markdown">(hugs you incredibly tight)
+
+Then just know I love every damn one of you and all the combos too, and that will never, ever change, no matter what</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="721962276873175087" id="message-721962276873175087">
+                <div class="chatlog__content">
+                    <div class="markdown">I don&#39;t know. We&#39;ve been pretty shitty lately. Especially lately.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="721963013460066435" id="message-721963013460066435">
+                <div class="chatlog__content">
+                    <div class="markdown">That was me</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="721963424950517761" id="message-721963424950517761">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;ve messed up
+
+Some for reasons that seemed to make sense, all based on a core of you caring so much
+
+It just gets twisted because you are still human enough.
+
+You&#39;re not bottomless, you&#39;re just dedicated to helping that much, and it burns you out more than you realize I think.
+
+We all have our issues and fuck up
+
+But you haven&#39;t ditched me for mine, and I won&#39;t for yours
+
+I&#39;m seriously near incapable of giving up on someone
+
+They pretty much have to be soulless or dead set on not getting better</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721963626612654112" id="message-721963626612654112">
+                <div class="chatlog__content">
+                    <div class="markdown">you have a piece of my heart
+
+I will never take it back</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721963678684938370" id="message-721963678684938370">
+                <div class="chatlog__content">
+                    <div class="markdown">honestly a few pieces lil</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721965201083072512" id="message-721965201083072512">
+                <div class="chatlog__content">
+                    <div class="markdown">you probably have enough for a heart container or two by now :)</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="721966101088698431" id="message-721966101088698431">
+                <div class="chatlog__content">
+                    <div class="markdown">Sorry, bad comment.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 01:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="721967220661551104" id="message-721967220661551104">
+                <div class="chatlog__content">
+                    <div class="markdown">huh? Did I mess up?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="721967344036872231" id="message-721967344036872231">
+                <div class="chatlog__content">
+                    <div class="markdown">No, I deleted my response before the apology</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="721967432704720976" id="message-721967432704720976">
+                <div class="chatlog__content">
+                    <div class="markdown">oh, I didn&#39;t see it, but I&#39;m sure it was ik</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721967459657056337" id="message-721967459657056337">
+                <div class="chatlog__content">
+                    <div class="markdown">*ok</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="721967597129826314" id="message-721967597129826314">
+                <div class="chatlog__content">
+                    <div class="markdown">Not really. It half joked about suicide</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="721967931961114644" id="message-721967931961114644">
+                <div class="chatlog__content">
+                    <div class="markdown"><img class="emoji " alt="🤷" title="🤷" src="https://twemoji.maxcdn.com/2/72x72/1f937.png">‍♀️that would not be the first time someone did, but ok
+
+I&#39;m glad you&#39;re here though
+
+The world is immensely better for having you even on your worst day</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="721968060382052352" id="message-721968060382052352">
+                <div class="chatlog__content">
+                    <div class="markdown">Do you wamte to retype it?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="721968594405294091" id="message-721968594405294091">
+                <div class="chatlog__content">
+                    <div class="markdown">if you want to ok, if you really wish you hadn&#39;t said it, you don&#39;t need to
+
+Just don&#39;t keep it to yourself because you think it&#39;ll hurt me
+
+I really would rather have open honesty with you than smoothness
+
+That&#39;s part of what I stumbled trying to say earlier</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721968676319920218" id="message-721968676319920218">
+                <div class="chatlog__content">
+                    <div class="markdown">that comes with hurt obviously, but also healing</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="721969074141134897" id="message-721969074141134897">
+                <div class="chatlog__content">
+                    <div class="markdown">What I said;
+You should probably take [the heart pieces] back before I kill ourself. Otherwise they will be lost. And I&#39;m typing slow cause  I&#39;m laying on my side with one hand.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:09 AM</span>
+
+            <div class="chatlog__message " data-message-id="721969534956732490" id="message-721969534956732490">
+                <div class="chatlog__content">
+                    <div class="markdown">been there <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️
+
+And no, they belong to you and your system now, even if I did take them back, they&#39;re tired to you
+
+If you die, parts of me die with you.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:09 AM</span>
+
+            <div class="chatlog__message " data-message-id="721969676648972318" id="message-721969676648972318">
+                <div class="chatlog__content">
+                    <div class="markdown">So I can&#39;t die then</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="721969862255181855" id="message-721969862255181855">
+                <div class="chatlog__content">
+                    <div class="markdown">I mean, that&#39;s a good outcome imo, but I&#39;m selfish and like you around :)</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="721970422748282961" id="message-721970422748282961">
+                <div class="chatlog__content">
+                    <div class="markdown">Sorry, brain is saying this: see you can&#39;t kill yourself no matter how hopeless your life is. Cause you can&#39;t hurt her ever again. You&#39;re the worst ever, and doing that would somehow make you worse</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="721970669419626498" id="message-721970669419626498">
+                <div class="chatlog__content">
+                    <div class="markdown">no, I would grieve but never blame, and you will hurt me again, and I will you, but if we try our best to be open honest and watch our flaws, we&#39;ll be ok <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721970793273229315" id="message-721970793273229315">
+                <div class="chatlog__content">
+                    <div class="markdown">and yeah, trust me, my brain wants to me this about me being horrible too, so I get jt</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721970863653781505" id="message-721970863653781505">
+                <div class="chatlog__content">
+                    <div class="markdown">*make this</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="721971312561619034" id="message-721971312561619034">
+                <div class="chatlog__content">
+                    <div class="markdown">But you aren&#39;t horrible. I and my system is. ........ Heh. Hahahahahahahaha it&#39;s gonna turn out to be cancer, cause it will finally be a physical indication of who we are mentally. A cancer that destroys everythinf</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721971620155228221" id="message-721971620155228221">
+                <div class="chatlog__content">
+                    <div class="markdown">And later today, we get to make up for this, too, cause fuck isn&#39;t it manipulative?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="721971705743933441" id="message-721971705743933441">
+                <div class="chatlog__content">
+                    <div class="markdown">Gwen, your system isn&#39;t horrible
+
+Each of you have messed up somewhere
+
+That&#39;s ok
+
+Make up for what?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="721971783795736596" id="message-721971783795736596">
+                <div class="chatlog__content">
+                    <div class="markdown"><div class="quote">But you aren&#39;t horrible. I and my system is. ........ Heh. Hahahahahahahaha it&#39;s gonna turn out to be cancer, cause it will finally be a physical indication of who we are mentally. A cancer that destroys everythinf
+</div>@Gwen | Vestas System#0000</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721971813743198209" id="message-721971813743198209">
+                <div class="chatlog__content">
+                    <div class="markdown"><div class="quote">Sorry, brain is saying this: see you can&#39;t kill yourself no matter how hopeless your life is. Cause you can&#39;t hurt her ever again. You&#39;re the worst ever, and doing that would somehow make you worse
+</div>@Gwen | Vestas System#0000</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="721971950263730208" id="message-721971950263730208">
+                <div class="chatlog__content">
+                    <div class="markdown">still confused, make up to who and why?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="721972035428810812" id="message-721972035428810812">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m having a breakdown cause you said your hurts. That is classical abusive behaviour</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="721972111333130283" id="message-721972111333130283">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;re not an abuser</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721972245181759498" id="message-721972245181759498">
+                <div class="chatlog__content">
+                    <div class="markdown">an abuser would be trying tk guilt me so I stopped and said it was ok and that nothing has to change</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721972342380691466" id="message-721972342380691466">
+                <div class="chatlog__content">
+                    <div class="markdown">people spiral when they hear things that hurt sometimes</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="721972520768766032" id="message-721972520768766032">
+                <div class="chatlog__content">
+                    <div class="markdown">Yes, but this essentially does the same thing, cause I&#39;m most people it guilts the into not pushing the subject anymore</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="721972553970876509" id="message-721972553970876509">
+                <div class="chatlog__content">
+                    <div class="markdown">(ironically my brain is telling me I manipulated you with my hardhness kindness combo)</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721972677153390663" id="message-721972677153390663">
+                <div class="chatlog__content">
+                    <div class="markdown">*harshness</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="721972782891794435" id="message-721972782891794435">
+                <div class="chatlog__content">
+                    <div class="markdown">Also, brain is saying to bring up everything you do that hurts us, but is also saying not to cause that detracts from your points.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="721973024709935134" id="message-721973024709935134">
+                <div class="chatlog__content">
+                    <div class="markdown">if I mess up, I want to talk about it, but in open kindness ways ok?
+
+I really don&#39;t want to hurt you more than is inevitable when fucked up people love each other</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721973301119025183" id="message-721973301119025183">
+                <div class="chatlog__content">
+                    <div class="markdown">some things I can&#39;t help, some I can, some I will be able to with time, some are just me, to be accepted or found reasons we&#39;re not actually compatable (I don&#39;t like that one, but it&#39;s possible)</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721973595643052032" id="message-721973595643052032">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s why I stopped too, because more would have been tk hurt you for hurting me</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="721973829509054477" id="message-721973829509054477">
+                <div class="chatlog__content">
+                    <div class="markdown">Whyt though? I deserve it</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="721974534345064459" id="message-721974534345064459">
+                <div class="chatlog__content">
+                    <div class="markdown">you don&#39;t
+
+Neither do I despite what my brain says
+
+If we have a relationship that relies on hurting to avenge, and not hurting to be honest, it&#39;s toxic and in bad shape
+
+Partners always hurt each other in little and big ways, that&#39;s unavoidable, again especially because (gestures wildly at our brains)
+
+But if we process and heal, if we keep it to just what&#39;s needed in the moment and come back to things too raw for then later, we&#39;ll be lk</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975101045735426" id="message-721975101045735426">
+                <div class="chatlog__content">
+                    <div class="markdown">I know you all pretty well and through a bunch of iterations</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975205584437270" id="message-721975205584437270">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;re all inherantly good people who most of the time do right and help the world be better</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975333917687891" id="message-721975333917687891">
+                <div class="chatlog__content">
+                    <div class="markdown">There&#39;s never been a point where I didn&#39;t love all of you in at least some weird and conplex eay6</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975360551387167" id="message-721975360551387167">
+                <div class="chatlog__content">
+                    <div class="markdown">*way</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975584682672148" id="message-721975584682672148">
+                <div class="chatlog__content">
+                    <div class="markdown">To hurt for hurtings sake is really bad, and you&#39;ve never doen it to me, and I won&#39;t to you</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975653880299641" id="message-721975653880299641">
+                <div class="chatlog__content">
+                    <div class="markdown">and</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975670011592796" id="message-721975670011592796">
+                <div class="chatlog__content">
+                    <div class="markdown">even if you did</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975797094547476" id="message-721975797094547476">
+                <div class="chatlog__content">
+                    <div class="markdown">I know you well enough to know you deserve forgiveness for a weak moment in pain</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721975983783018497" id="message-721975983783018497">
+                <div class="chatlog__content">
+                    <div class="markdown">an abuser would attack me hard emotionaly the second I pushed back
+
+Every time
+
+No mercy</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721976150200418335" id="message-721976150200418335">
+                <div class="chatlog__content">
+                    <div class="markdown">you are a victim of so much, some of their habits have been internalized</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976193821310977" id="message-721976193821310977">
+                <div class="chatlog__content">
+                    <div class="markdown">Warning</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976218127433738" id="message-721976218127433738">
+                <div class="chatlog__content">
+                    <div class="markdown">ok</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976244509474816" id="message-721976244509474816">
+                <div class="chatlog__content">
+                    <div class="markdown">Christina pushed that</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976421555241060" id="message-721976421555241060">
+                <div class="chatlog__content">
+                    <div class="markdown">pushed which part? The internalized?
+
+I was about to say you control it and are more often afraid of things that aren&#39;t there</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721976494334935101" id="message-721976494334935101">
+                <div class="chatlog__content">
+                    <div class="markdown">abusive actions on your part I mean</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721976547749265508" id="message-721976547749265508">
+                <div class="chatlog__content">
+                    <div class="markdown">if I&#39;m off correct me please, I&#39;m sorry</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976550454722591" id="message-721976550454722591">
+                <div class="chatlog__content">
+                    <div class="markdown">Telling you so we don&#39;t get defensive. Wording was trigger-y. Sorry</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="721976604942794803" id="message-721976604942794803">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, I can get that</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721976763328102441" id="message-721976763328102441">
+                <div class="chatlog__content">
+                    <div class="markdown">point being, in no way are you actually an abuser, except maybe to yourself, but in that special way we all have managed to hate ourselves</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="721977147010318426" id="message-721977147010318426">
+                <div class="chatlog__content">
+                    <div class="markdown">Oh, hey, BPD. That&#39;s probably playing a part of my reaction</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="721977276115189760" id="message-721977276115189760">
+                <div class="chatlog__content">
+                    <div class="markdown">oh, I forget who has what sometimes <img class="emoji " alt="🤦" title="🤦" src="https://twemoji.maxcdn.com/2/72x72/1f926.png">‍♀️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721977374580801549" id="message-721977374580801549">
+                <div class="chatlog__content">
+                    <div class="markdown">BPD bumping BPD is fun <img class="emoji " alt="🙄" title="🙄" src="https://twemoji.maxcdn.com/2/72x72/1f644.png"></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="721978650802651156" id="message-721978650802651156">
+                <div class="chatlog__content">
+                    <div class="markdown">The biggest reason we have been talking with you less is cause everything is too much. Literally everything. And our conversations haven&#39;t been good lately, and more often than not turn away from what&#39;s going on in our head, good or bad. So we escape in a game we consider to be the perfect MMO for us. Which itself feeds your feeling of abandonment, which makes us feel like we are failing. Which then burns us out, so we retreat more. And we haven&#39;t had a break since ...... I don&#39;t even know. And I mean a break from everything. It&#39;s always another thing in our life. And that&#39;s even suckier for you, cause you have two bodies, us or your wife.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="721979555073753098" id="message-721979555073753098">
+                <div class="chatlog__content">
+                    <div class="markdown">That makes sense
+
+I do want you to have a break
+
+I do try and push that sometimes, but you&#39;re resistant because you feel needed, which becomes a catch 22.  If you leave and bad things happen, you&#39;d blame yourself regadless of your impact
+
+If they didn&#39;t, you risk feeling unneeded.
+
+The best I can say is, if you talk to everyone here and tell them what you need, then really, truely go off for a while to rest, we&#39;ll understand and be ok</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721979621377048606" id="message-721979621377048606">
+                <div class="chatlog__content">
+                    <div class="markdown">but you have to really rest, whatever that takes</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721980071472136223" id="message-721980071472136223">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry I make things about me so much, I don&#39;t mean to
+
+Most times it&#39;s me trying to relate and then it comes off all badly because I still don&#39;t get a lot of social interactions</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721980140284018728" id="message-721980140284018728">
+                <div class="chatlog__content">
+                    <div class="markdown">which is an explanation, not and excuse
+
+I&#39;m trying to be better</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721980372732084275" id="message-721980372732084275">
+                <div class="chatlog__content">
+                    <div class="markdown">really truely, if I start messing up, poke me
+
+If I&#39;m defensive, you can say so and leave, but hopefully I won&#39;t be and will learn from it <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721980515800055820" id="message-721980515800055820">
+                <div class="chatlog__content">
+                    <div class="markdown">which, fuck, is turning things back to me
+
+Look, valid aside ok, back to you resting</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:54 AM</span>
+
+            <div class="chatlog__message " data-message-id="721981065413132378" id="message-721981065413132378">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s alright. ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:56 AM</span>
+
+            <div class="chatlog__message " data-message-id="721981340475719742" id="message-721981340475719742">
+                <div class="chatlog__content">
+                    <div class="markdown">and only say that if it really is ok? It&#39;s alright to say &quot;yeah you fucked up Branwyn, but it wasn&#39;t huge and we forgive you&quot; ok</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721981581216186428" id="message-721981581216186428">
+                <div class="chatlog__content">
+                    <div class="markdown">otherwise it&#39;s hard to tell if you mean that, or that what I did was fine, no error found
+
+(Gods I get autistic at the weirdest times <img class="emoji " alt="🤦" title="🤦" src="https://twemoji.maxcdn.com/2/72x72/1f926.png">‍♀️)</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721981803459772467" id="message-721981803459772467">
+                <div class="chatlog__content">
+                    <div class="markdown">Anyway, so you think that kind of rest is possible? Keeping in mind you have work and Lauren as factors you can&#39;t take full breaks from</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721981847877189682" id="message-721981847877189682">
+                <div class="chatlog__content">
+                    <div class="markdown">*ugh, do not so</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721981914252312655" id="message-721981914252312655">
+                <div class="chatlog__content">
+                    <div class="markdown">my fingers hate me tonight...and every night <img class="emoji " alt="🤣" title="🤣" src="https://twemoji.maxcdn.com/2/72x72/1f923.png"></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:58 AM</span>
+
+            <div class="chatlog__message " data-message-id="721982050990686298" id="message-721982050990686298">
+                <div class="chatlog__content">
+                    <div class="markdown">We will try to remember.
+
+And we have no clue. Possible cancer too</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721982089330819117" id="message-721982089330819117">
+                <div class="chatlog__content">
+                    <div class="markdown">*as a facror</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 02:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="721982187704156252" id="message-721982187704156252">
+                <div class="chatlog__content">
+                    <div class="markdown">yeah, but it&#39;s low odds and unknown, so for now we won&#39;t plan around it and rework if needed</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="721982413147996282" id="message-721982413147996282">
+                <div class="chatlog__content">
+                    <div class="markdown">See, the problem is the odds are low. But the odds of it being a possibility are 100%, and thus the brain reacts as it being a valid possible outcome.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="721982444127125604" id="message-721982444127125604">
+                <div class="chatlog__content">
+                    <div class="markdown">am I doing the other thing now and pushing to hard to fix?</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721982498699083806" id="message-721982498699083806">
+                <div class="chatlog__content">
+                    <div class="markdown">oh no, I get that</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721982595167944716" id="message-721982595167944716">
+                <div class="chatlog__content">
+                    <div class="markdown">I just mean you shouldn&#39;t include it as a factor in planning yet</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721982650558185552" id="message-721982650558185552">
+                <div class="chatlog__content">
+                    <div class="markdown">you will worry, anyone would</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="721983018629333074" id="message-721983018629333074">
+                <div class="chatlog__content">
+                    <div class="markdown">But because of the possibility and the way our brain works, saying don&#39;t include it when factoring things in = it&#39;s not possible, shut up and forget about it</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983072110641253" id="message-721983072110641253">
+                <div class="chatlog__content">
+                    <div class="markdown">To us, I mean</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="721983075512483850" id="message-721983075512483850">
+                <div class="chatlog__content">
+                    <div class="markdown">ok</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983105883308043" id="message-721983105883308043">
+                <div class="chatlog__content">
+                    <div class="markdown">so plan for both</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983230185832539" id="message-721983230185832539">
+                <div class="chatlog__content">
+                    <div class="markdown">if it helps more than hurts, great :)</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983610588102748" id="message-721983610588102748">
+                <div class="chatlog__content">
+                    <div class="markdown">but you have to make something happen rest wise
+
+It&#39;s a constant problem you keep feeling that has just been getting worse and hurting you and some of those close to you
+
+You can&#39;t keep saying you can tough it out</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983791035580491" id="message-721983791035580491">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s like being in the clothset, yeah, you can do it, but every day it&#39;s harder and does more damage <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721983906387066943" id="message-721983906387066943">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;ll stop there unless you ask my opinion</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721984014159839294" id="message-721984014159839294">
+                <div class="chatlog__content">
+                    <div class="markdown">my point is made, so I feel more unasked for is bad</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="721984575294930954" id="message-721984575294930954">
+                <div class="chatlog__content">
+                    <div class="markdown">Part of the problem is that we seem to, by virtue of being Ina conversation with someone, seem to end up with them telling us everything wrong with themselves. Hell, Mayra (Amy) does it every time we talk and specifically made a point to tell us she never does that.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:09 AM</span>
+
+            <div class="chatlog__message " data-message-id="721984774486491138" id="message-721984774486491138">
+                <div class="chatlog__content">
+                    <div class="markdown">Gwen... that&#39;s what happens to all of us lol</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:09 AM</span>
+
+            <div class="chatlog__message " data-message-id="721984801720238121" id="message-721984801720238121">
+                <div class="chatlog__content">
+                    <div class="markdown">(and just realized the double seem to, shush, we should have been in bed four hours ago and have to be up in 2.5)</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="721985038316732467" id="message-721985038316732467">
+                <div class="chatlog__content">
+                    <div class="markdown">people spill to Kelly, to Cass,to me, we&#39;re in a group of people who are in constant pain of some kind and need validation</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721985205212282880" id="message-721985205212282880">
+                <div class="chatlog__content">
+                    <div class="markdown">and I don&#39;t know about Mayra, but Amy&#39;s system does do that with us</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721985385412165673" id="message-721985385412165673">
+                <div class="chatlog__content">
+                    <div class="markdown">you can tell people no, and you can also take a break from being online</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="721985587409846272" id="message-721985587409846272">
+                <div class="chatlog__content">
+                    <div class="markdown">That was just an example. The point being, we have had zero conversations in the last three months outside of Kamori and Rayne where it didnt happen. And that is honestly how drastic it would have to be if we took that route.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:15 AM</span>
+
+            <div class="chatlog__message " data-message-id="721986343135346763" id="message-721986343135346763">
+                <div class="chatlog__content">
+                    <div class="markdown">yeah, that&#39;s what I was suggesting
+
+And I dispute that too btw
+
+We have had convos with your system that were more than brief and didn&#39;t wander off recently
+
+Talking about the novel fir example, but point being, you <em>have</em> to do something to heal
+ 
+It&#39;s not optional dear <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721986487603953675" id="message-721986487603953675">
+                <div class="chatlog__content">
+                    <div class="markdown">and the longer it goes, the harder it will be, and the more drastic too</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721986747868774490" id="message-721986747868774490">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m really just telling you stuff back that you&#39;ve said at this point
+
+You know it&#39;s big, that it&#39;s doing damage, and can&#39;t go on forever</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721987012105863209" id="message-721987012105863209">
+                <div class="chatlog__content">
+                    <div class="markdown">you either burn out, wait for almost every relationship dynamic you have to change quickly in its own, or do something to help</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721987407989309440" id="message-721987407989309440">
+                <div class="chatlog__content">
+                    <div class="markdown">anyway, I&#39;m going on again
+
+We should sleep, but you can have the last word, I won&#39;t address, just aknowledge and we can say goodnight</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721987544996380763" id="message-721987544996380763">
+                <div class="chatlog__content">
+                    <div class="markdown">fuck...one last thing...</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721987764714864691" id="message-721987764714864691">
+                <div class="chatlog__content">
+                    <div class="markdown">you did all get mad at everyone for not telling you stuff a while back...and I don&#39;t mean that to blame you, but it probably has contributed
+
+I know it has for me and Cass</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721987787296866324" id="message-721987787296866324">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, done</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721988350755602474" id="message-721988350755602474">
+                <div class="chatlog__content">
+                    <div class="markdown">i have more on that, but not tonight</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="721988418258731079" id="message-721988418258731079">
+                <div class="chatlog__content">
+                    <div class="markdown">Sorry ❤️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="721988504489558067" id="message-721988504489558067">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;ll keep my word and say goodnight and I love you
+
+(It&#39;s ok, we could go on forever) <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="721988823092953129" id="message-721988823092953129">
+                <div class="chatlog__content">
+                    <div class="markdown">You know those two comments make things worse, right? Cause they leave me in a state of hating myself for having said it, and now dreading the new conversation cause I fucked up and said something stupid.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="721988978261229660" id="message-721988978261229660">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry..
+
+
+ok, do you want me to address it real quick?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="721989093629624320" id="message-721989093629624320">
+                <div class="chatlog__content">
+                    <div class="markdown">We are already getting less than two hours of sleep, so sure.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="721989780056834058" id="message-721989780056834058">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, quick version
+
+We don&#39;t know what will blow up until it does, so we&#39;re stuck telling everything, also you did say to tell you it all for similar reasons, also beyond that you had a period where you felt like everyone was keeping stuff from you to protect you from their pain and felt isolated for it and made clear no one was to do that or ask someone to not mention something going on with them to you when they knew you were in a bad spot</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721989991470858311" id="message-721989991470858311">
+                <div class="chatlog__content">
+                    <div class="markdown">you let me have it for asking Kelly to delay until the next day once</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721990146412773458" id="message-721990146412773458">
+                <div class="chatlog__content">
+                    <div class="markdown">these are general yous btw</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721990212326260737" id="message-721990212326260737">
+                <div class="chatlog__content">
+                    <div class="markdown">I can&#39;t remember who did what system wise at this point of tired</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="721990845271769089" id="message-721990845271769089">
+                <div class="chatlog__content">
+                    <div class="markdown">Our stance on this changes as the situations change. And we acknowledge that we have been wishy washy on it several times. But again, situations change, and needs change with it. We failed to convey properly that tbose requests were born of the time they were happening, and would not necessarily be permanent all the time rules.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721990962330730547" id="message-721990962330730547">
+                <div class="chatlog__content">
+                    <div class="markdown">And it is a failure on us.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:34 AM</span>
+
+            <div class="chatlog__message " data-message-id="721991123412713514" id="message-721991123412713514">
+                <div class="chatlog__content">
+                    <div class="markdown">I understand
+
+If you communicate what you need as time goes by, I think moat of us will have no issues</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721991234746581022" id="message-721991234746581022">
+                <div class="chatlog__content">
+                    <div class="markdown">We want you to be happy and included</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721991269449990254" id="message-721991269449990254">
+                <div class="chatlog__content">
+                    <div class="markdown">promise</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721991562556604426" id="message-721991562556604426">
+                <div class="chatlog__content">
+                    <div class="markdown">also, seriously, it&#39;s ok to say you don&#39;t have the spoons
+
+Anytime
+
+Just, &quot;sorry, I care, no spoons today (appropriate heart)
+
+Let&#39;s talk about x instead&quot;</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721992169971384331" id="message-721992169971384331">
+                <div class="chatlog__content">
+                    <div class="markdown">that&#39;s a you issue to work out, because we&#39;re being honest and you jumped into savior mode by mistake
+
+Working on that will help the guilt, but also, just remember it was a mistake and try to go forward like you&#39;d advise anyone else I&#39;m sure</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721992798525587498" id="message-721992798525587498">
+                <div class="chatlog__content">
+                    <div class="markdown">you didn&#39;t have to delete that</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721992838694567996" id="message-721992838694567996">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s ok</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721992909343293450" id="message-721992909343293450">
+                <div class="chatlog__content">
+                    <div class="markdown">sorry if I came off flippant, sleepyness</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721993076637302895" id="message-721993076637302895">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s valid feelings, but not something that&#39;s due to error by the other person</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993110724542484" id="message-721993110724542484">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s not an us issue. But it was too much effort to try to explain why. So I just give up on that.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721993164872876103" id="message-721993164872876103">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s my fault, I&#39;m sorry, I&#39;ll work on it.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993227451760681" id="message-721993227451760681">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m sorry :/
+
+I would like to understand some time later then</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993286230736978" id="message-721993286230736978">
+                <div class="chatlog__content">
+                    <div class="markdown">It doesn&#39;t matter</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993320364245052" id="message-721993320364245052">
+                <div class="chatlog__content">
+                    <div class="markdown">why not?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993359228403732" id="message-721993359228403732">
+                <div class="chatlog__content">
+                    <div class="markdown"><div class="quote">It&#39;s my fault, I&#39;m sorry, I&#39;ll work on it.
+</div>@Gwen | Vestas System#0000</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/514903093352333321/3af7df1b111bfeed00056353dc3ea582.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="BlueRaven#6034" data-user-id="514903093352333321"  style="color: rgb(39, 126, 205)" >BlueRaven</span>
+
+
+        <span class="chatlog__timestamp">15-Jun-20 03:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993407521751121" id="message-721993407521751121">
+                <div class="chatlog__content">
+                    <div class="markdown"><div class="quote">It&#39;s not an us issue. But it was too much effort to try to explain why. So I just give up on that.
+</div>@Gwen | Vestas System#0000</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="721993552426434661" id="message-721993552426434661">
+                <div class="chatlog__content">
+                    <div class="markdown">if you really feel it&#39;s not your issue, I&#39;d like to understand because if it isn&#39;t, I want to so better</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721993659221934182" id="message-721993659221934182">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m not trying to put it all on you, that one I just saw that way</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721993746526371911" id="message-721993746526371911">
+                <div class="chatlog__content">
+                    <div class="markdown">If I&#39;m off, I&#39;m off and sorry <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994013636296759" id="message-721994013636296759">
+                <div class="chatlog__content">
+                    <div class="markdown">We have tried to use almost the exact thing you told us to say, about not having spoons. The response we received back was &quot;I didn&#39;t say it to be comforted.&quot; We didn&#39;t say we were trying! We just said we don&#39;t have the spoons to talk about it, and the person automatically assumed. So we still lose, and now feel guilty for saying anything at all.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994112831586353" id="message-721994112831586353">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, I get that</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994174353768490" id="message-721994174353768490">
+                <div class="chatlog__content">
+                    <div class="markdown">And that&#39;s what 99% of the time we have said we have no spoons can we talk about something else, the response we get.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721994342679445505" id="message-721994342679445505">
+                <div class="chatlog__content">
+                    <div class="markdown">And then to hear that that was a &quot;you&quot; issue...</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994551392206879" id="message-721994551392206879">
+                <div class="chatlog__content">
+                    <div class="markdown">so, part of that is your reputation and their prior experience
+
+Maybe adding &quot;I don&#39;t know if you&#39;re asking for help with this or not, but I don&#39;t have the spoons to help or talk about this....&quot;</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721994678219571270" id="message-721994678219571270">
+                <div class="chatlog__content">
+                    <div class="markdown">I retract my &quot;you issue&quot; statement and I&#39;m sorry</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994685291429939" id="message-721994685291429939">
+                <div class="chatlog__content">
+                    <div class="markdown">So it&#39;s still an us issue, then?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="721994795500699739" id="message-721994795500699739">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s an unclear communication issue on both sides, but you have info they don&#39;t</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721995254999547934" id="message-721995254999547934">
+                <div class="chatlog__content">
+                    <div class="markdown">you&#39;re basically asking them to respect your need to not be told you were expecting to be helping
+
+Because when they hear the original, they also think &quot;oh no, O made her think I was asking too much of her and I feel bad&quot;
+
+So it&#39;s an attempt to reassure that&#39;s failing</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721995454665195562" id="message-721995454665195562">
+                <div class="chatlog__content">
+                    <div class="markdown">addressing that up front on your end is the moat consistent way to mitigate it across individuals</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721995635565395979" id="message-721995635565395979">
+                <div class="chatlog__content">
+                    <div class="markdown">the other option is to ask people to state always state if they want comfort, advice, or just to be heard</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721995764242448474" id="message-721995764242448474">
+                <div class="chatlog__content">
+                    <div class="markdown">you can&#39;t eliminatenthe reason we&#39;re all saying it though</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721995861218820137" id="message-721995861218820137">
+                <div class="chatlog__content">
+                    <div class="markdown">if it&#39;s that consistent, it&#39;s a pretty rote reaction sadly</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721996205789282354" id="message-721996205789282354">
+                <div class="chatlog__content">
+                    <div class="markdown">so it&#39;s not a you issue in you&#39;re having an unreasonable reaction, but it is something you need for your well being that is not assumed, so you need to let people know to not do it</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721996349863886918" id="message-721996349863886918">
+                <div class="chatlog__content">
+                    <div class="markdown">Gwen
+
+We need to sleep ok?</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721996444109635734" id="message-721996444109635734">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m about to drop deep into counterproductive land in this convo</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721996587626266664" id="message-721996587626266664">
+                <div class="chatlog__content">
+                    <div class="markdown">like, too tired to make my point right so it comes out wrong and makes stuff worse</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/1240b8cff8beb3bdee8d1a814e420dfb.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gwen | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:57 AM</span>
+
+            <div class="chatlog__message " data-message-id="721996842862379008" id="message-721996842862379008">
+                <div class="chatlog__content">
+                    <div class="markdown">Night. We probably won&#39;t talk much today. We are ending up with less than two hours of sleep. Talk to you later, hopefully today.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 03:58 AM</span>
+
+            <div class="chatlog__message " data-message-id="721997149985833020" id="message-721997149985833020">
+                <div class="chatlog__content">
+                    <div class="markdown">yeah, I&#39;m at like 2.5 if I&#39;m lucky, so same
+
+We&#39;re here to talk through this more if it helps at all
+
+The goal is to help you, ok?
+
+If it&#39;s not, we try something else including me shutting up <img class="emoji " alt="♥" title="♥" src="https://twemoji.maxcdn.com/2/72x72/2665.png">️</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="721997245406380053" id="message-721997245406380053">
+                <div class="chatlog__content">
+                    <div class="markdown">love you tons, and thanks for the honesty</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/9762795d17baf3dedd68019027b1c8b3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sam | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Jun-20 06:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="722042610046337155" id="message-722042610046337155">
+                <div class="chatlog__content">
+                    <div class="markdown">So, I&#39;m maybe up front? I think this is me writing this. Me or Sera. But anyways. Morning Branwyn, Stella, Sterling.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Jun-20 07:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="722955244622970900" id="message-722955244622970900">
+                <div class="chatlog__content">
+                    <div class="markdown">Hey. So, we ended up fronting, and I don&#39;t know that we are ready yet <em><strong>because of us.</strong></em> We are still figuring things out. But, we wanted to let you know we are okay. And Cortana and Sera loved seeing those messages. <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"><img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"> But, we will probably be quiet. 
+
+We are sorry. For everything.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Jun-20 07:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="722958347846025306" id="message-722958347846025306">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m not sure which <em>us</em> that is, you two or me and you
+
+I...felt bad not sending anything to you too, but I didn&#39;t want to poke.
+
+I&#39;m honestly here for you whenever you want, but we need to work some things out, and part of that I think is what no you&#39;re working on.
+
+Listen, I was honest and tried to be kind, but failed.
+
+I&#39;m sorry too.
+
+I don&#39;t know what will happen, but you&#39;re still dear to me and I all of you to be happy and thrive.
+
+I&#39;ll be around tonight if anyone shows up and wants to talk, you included, but I won&#39;t be hurt if not because (waves at previous conversation)
+
+Anyway, thanks for checking in <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"><img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Jun-20 07:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="722958673478942770" id="message-722958673478942770">
+                <div class="chatlog__content">
+                    <div class="markdown">We meant us too. (Some heart to show our guilt and remorse over all the hurt and failings)
+
+Thank you.</div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="722958726394413117" id="message-722958726394413117">
+                <div class="chatlog__content">
+                    <div class="markdown">*us two</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Jun-20 07:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="722962081191690250" id="message-722962081191690250">
+                <div class="chatlog__content">
+                    <div class="markdown">appreciated, please take care
+
+And again, I&#39;m sorry for the hurt too</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Jun-20 07:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="723324969794273312" id="message-723324969794273312">
+                <div class="chatlog__content">
+                    <div class="markdown">we weren&#39;t sure if you wanted us to stay away too
+
+If so, sorry and we&#39;ll back off
+
+If not, just wanted to check on you</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Jun-20 08:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="723327635471466506" id="message-723327635471466506">
+                <div class="chatlog__content">
+                    <div class="markdown">Sorry, yes, we meant you as well. We need time away from you, Stella, Sterling, and Lynn. We .... This morning was not good, and we were angry at everyone in your system that regularly fronts, no matter how tangentally related to last night.
+
+One update we feel you deserve to know. We&#39;ve started to let go of Gwen. Our fusion even renamed herself to Arianwen. 
+
+Please, be safe. And please be healthy.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Jun-20 08:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="723327909061853206" id="message-723327909061853206">
+                <div class="chatlog__content">
+                    <div class="markdown">ok, I&#39;m sorry... we&#39;re sorry
+
+I&#39;m guessing no one else will be talking to is either yes?</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/cc2d6c4b491a63250fd7f354358d6d82.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="The &#39;wens | Vestas System#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Jun-20 08:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="723328275425919087" id="message-723328275425919087">
+                <div class="chatlog__content">
+                    <div class="markdown">We don&#39;t know. We are alone right now, but we have a feeling Sera and Cortana will reach out as long as you don&#39;t talk about us. They wouldn&#39;t want to have to choose.</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/678430672553246751/fc879e3189825fdcbbe94ff463fbd7c0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Branwyn#0000" data-user-id="678430672553246751" >Branwyn</span>
+
+        <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Jun-20 08:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="723328561850613871" id="message-723328561850613871">
+                <div class="chatlog__content">
+                    <div class="markdown">ok
+
+I&#39;m sorry I&#39;m so damaging...
+
+It wasn&#39;t at all what I wanted to meant to happen, Stella too
+
+We&#39;ll leave you completly alone</div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 237 message(s)</div>
+</div>
+
+</body>
+</html>
